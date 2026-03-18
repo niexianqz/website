@@ -1,83 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>niexian website</title>
-  <style>
-    /* Center the content on the screen */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #1a1a1a; /* Dark sleek background */
-      margin: 0;
-      font-family: 'Courier New', Courier, monospace;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niexian | Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Dancing+Script:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    /* Container for the rainbow text */
-    #typing-text {
-      font-size: 4rem;
-      font-weight: bold;
-      position: relative;
-    }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-    /* Blinking cursor effect */
-    #typing-text::after {
-      content: '|';
-      color: #ffffff; /* White cursor */
-      position: absolute;
-      margin-left: 8px;
-      animation: blink 0.8s step-end infinite;
-    }
+        /* --- TOP SECTION: Rainbow Logo --- */
+        .rainbow-container {
+            font-size: clamp(3rem, 10vw, 6rem); /* Responsive font size */
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+        }
 
-    @keyframes blink {
-      from, to { opacity: 0; }
-      50% { opacity: 1; }
-    }
-  </style>
+        /* Individual letter colors from the screenshot */
+        .r-n { color: #ff3b30; }
+        .r-i { color: #ff9500; }
+        .r-e { color: #ffcc00; }
+        .r-x { color: #4cd964; }
+        .r-i2 { color: #007aff; }
+        .r-a { color: #5856d6; }
+        .r-n2 { color: #af52de; }
+
+        .cursor {
+            color: #ffffff;
+            margin-left: 10px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* --- MIDDLE SECTION: Welcome & Dev Tag --- */
+        .star {
+            color: #00ffcc;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 40px;
+        }
+
+        .nx-bold {
+            font-weight: 800;
+            font-size: 1.2em;
+        }
+
+        .dev-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+            padding: 10px 40px;
+        }
+
+        /* Blue Brush Stroke Effect */
+        .brush-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 80%;
+            background: linear-gradient(90deg, transparent, #1a4a9e, transparent);
+            filter: blur(15px);
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .dev-tag {
+            color: #ff4d4d;
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+
+        .dev-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin-left: 15px;
+        }
+
+        /* --- CODE SECTION --- */
+        .code-area {
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 80px;
+            max-width: 600px;
+        }
+
+        .c-yellow { color: #ffcc00; }
+        .c-pink { color: #ff00ff; }
+        .c-cyan { color: #00cccc; }
+        .c-green { color: #a6e22e; }
+        .c-gray { color: #75715e; }
+
+        /* --- FOOTER SECTION --- */
+        .footer-tech {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+    </style>
 </head>
 <body>
 
-  <div id="typing-text"></div>
+    <div class="rainbow-container">
+        <span class="r-n">n</span><span class="r-i">i</span><span class="r-e">e</span><span class="r-x">x</span><span class="r-i2">i</span><span class="r-a">a</span><span class="r-n2">n</span>
+        <span class="cursor">|</span>
+    </div>
 
-  <script>
-    const textToType = "niexian";
-    const typingSpeed = 150; // Speed in milliseconds
-    
-    // Rainbow color palette
-    const rainbowColors = [
-      '#FF0000', // Red
-      '#FF7F00', // Orange
-      '#FFFF00', // Yellow
-      '#00FF00', // Green
-      '#0000FF', // Blue
-      '#4B0082', // Indigo
-      '#9400D3'  // Violet
-    ];
-    
-    let i = 0;
-    const textElement = document.getElementById("typing-text");
+    <div class="star">✦</div>
 
-    function typeWriterRainbow() {
-      if (i < textToType.length) {
-        const char = textToType.charAt(i);
-        const color = rainbowColors[i % rainbowColors.length];
-        
-        // Wrap each character in a span with a specific color
-        textElement.innerHTML += `<span style="color:${color}">${char}</span>`;
-        
-        i++;
-        setTimeout(typeWriterRainbow, typingSpeed);
-      }
-    }
+    <div class="welcome-text">
+        Welcome to the <span class="nx-bold">NX.</span> website.
+    </div>
 
-    // Start the effect after a short delay
-    window.onload = () => {
-      setTimeout(typeWriterRainbow, 500); 
-    };
-  </script>
+    <div class="dev-wrapper">
+        <div class="brush-bg"></div>
+        <span class="dev-tag">Dev.</span>
+        <span class="dev-name">Niexian</span>
+    </div>
+
+    <div class="code-area">
+        <div><span class="c-yellow">this_page</span>.<span class="c-pink">home</span> = <span class="c-yellow">true</span>;</div>
+        <div><span class="c-yellow">if</span> (<span class="c-cyan">page_niexian</span>) <span class="c-yellow">niexian_home</span>();</div>
+        <div><span class="c-yellow">else</span> <span class="c-pink">console</span>.<span class="c-pink">log</span>(<span class="c-green">"Welcome to the NX. website."</span>);</div>
+        <div><span class="c-yellow">window</span>.<span class="c-pink">location</span> = <span class="c-gray">www.niexian.com;</span></div>
+    </div>
+
+    <div class="footer-tech">
+        <div class="tech-item"><b>JS</b> Javascript & NodeJS</div>
+        <div class="tech-item"><b>PHP</b> PHP</div>
+        <div class="tech-item"><b>HTML</b> HTML & CSS, SCSS</div>
+        <div class="tech-item"><b>&lt;/&gt;</b> Nativescript & Dart</div>
+    </div>
 
 </body>
 </html>
