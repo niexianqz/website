@@ -9,7 +9,7 @@
         * { box-sizing: border-box; }
 
         body {
-            background-color: #0d0d0d;
+            background-color: #0a0a0a; /* Slightly darker for better glow contrast */
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -27,7 +27,7 @@
             font-size: clamp(3.5rem, 12vw, 7rem);
             font-weight: 800;
             letter-spacing: -3px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
         }
@@ -40,19 +40,11 @@
         .r-a { color: #5856d6; }
         .r-n2 { color: #af52de; }
 
-        .cursor-main {
-            color: #ffffff;
-            margin-left: 10px;
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
         /* --- MIDDLE SECTION --- */
         .star { color: #00ffcc; font-size: 1.8rem; margin-bottom: 10px; }
 
         .welcome-text {
-            font-size: clamp(1.2rem, 4vw, 2.2rem);
+            font-size: clamp(1.2rem, 4vw, 2rem);
             margin-bottom: 30px;
             font-weight: 400;
         }
@@ -71,9 +63,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 140%;
-            height: 70px;
-            background: rgba(30, 80, 180, 0.4);
-            filter: blur(20px);
+            height: 60px;
+            background: rgba(30, 80, 180, 0.35);
+            filter: blur(25px);
             z-index: -1;
             border-radius: 50px;
         }
@@ -85,13 +77,23 @@
             margin-left: 15px;
         }
 
-        /* --- TYPING ANIMATION SECTION --- */
+        /* --- GLOWING CODE WINDOW --- */
+        .code-window {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.08); /* White outer glow */
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
         .code-area {
             font-family: 'Fira Code', monospace;
-            font-size: clamp(0.85rem, 2.5vw, 1.05rem);
-            line-height: 2;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            line-height: 1.8;
             text-align: left;
-            margin-bottom: 60px;
         }
 
         .line {
@@ -102,14 +104,24 @@
             border-right: 2px solid transparent;
         }
 
+        /* Sequential Typing Animation */
         .line-1 { animation: typing 1s steps(30) 0.5s forwards, hideCursor 0.1s 1.5s forwards; }
         .line-2 { animation: typing 1s steps(30) 1.5s forwards, hideCursor 0.1s 2.5s forwards; }
         .line-3 { animation: typing 1.5s steps(40) 2.5s forwards, hideCursor 0.1s 4.0s forwards; }
-        .line-4 { animation: typing 1.2s steps(35) 4.0s forwards, showCursor 0.1s 4.0s forwards; }
+        .line-4 { animation: typing 1.2s steps(35) 4.0s forwards, blinkCursor 0.8s infinite 5.2s; }
 
-        @keyframes typing { from { width: 0; border-right-color: #fff; } to { width: 100%; border-right-color: #fff; } }
+        @keyframes typing { 
+            from { width: 0; border-right-color: #fff; } 
+            to { width: 100%; border-right-color: #fff; } 
+        }
+
         @keyframes hideCursor { to { border-right-color: transparent; } }
-        @keyframes showCursor { to { border-right-color: #fff; } }
+
+        /* Final Cursor Blinking after typing ends */
+        @keyframes blinkCursor {
+            0%, 100% { border-right-color: #fff; }
+            50% { border-right-color: transparent; }
+        }
 
         .c-yellow { color: #ffcc00; }
         .c-pink { color: #ff00ff; }
@@ -122,32 +134,23 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-            color: #888;
-            font-size: 0.85rem;
+            gap: 25px;
+            color: #666;
+            font-size: 0.8rem;
             padding-top: 30px;
             border-top: 1px solid #222;
             width: 100%;
-            max-width: 1000px;
+            max-width: 900px;
         }
 
         .footer-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: color 0.3s;
+            gap: 8px;
         }
 
-        .footer-item:hover { color: #fff; }
-
-        .svg-icon {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-            opacity: 0.8;
-        }
-
-        .footer-label { font-weight: 500; letter-spacing: 0.5px; }
+        .svg-icon { width: 14px; height: 14px; fill: currentColor; }
+        .footer-label { font-weight: 500; }
 
     </style>
 </head>
@@ -155,7 +158,6 @@
 
     <div class="rainbow-container">
         <span class="r-n">n</span><span class="r-i">i</span><span class="r-e">e</span><span class="r-x">x</span><span class="r-i2">i</span><span class="r-a">a</span><span class="r-n2">n</span>
-        <span class="cursor-main">|</span>
     </div>
 
     <div class="star">✦</div>
@@ -170,28 +172,30 @@
         <span class="dev-name">Niexian</span>
     </div>
 
-    <div class="code-area">
-        <span class="line line-1"><span class="c-yellow">this_page</span>.<span class="c-pink">home</span> = <span class="c-yellow">true</span>;</span>
-        <span class="line line-2"><span class="c-yellow">if</span> (<span class="c-cyan">page_niexian</span>) <span class="c-yellow">niexian_home</span>();</span>
-        <span class="line line-3"><span class="c-yellow">else</span> <span class="c-pink">console</span>.<span class="c-pink">log</span>(<span class="c-green">"Welcome to the NX. website."</span>);</span>
-        <span class="line line-4"><span class="c-yellow">window</span>.<span class="c-pink">location</span> = <span class="c-gray">"https://niexian.site";</span></span>
+    <div class="code-window">
+        <div class="code-area">
+            <span class="line line-1"><span class="c-yellow">This_page</span>.<span class="c-pink">home</span> = <span class="c-yellow">true</span>;</span>
+            <span class="line line-2"><span class="c-yellow">if</span> (<span class="c-cyan">page_niexian</span>) <span class="c-yellow">niexian_home</span>();</span>
+            <span class="line line-3"><span class="c-yellow">else</span> <span class="c-pink">console</span>.<span class="c-pink">log</span>(<span class="c-green">"Welcome to the NX. website."</span>);</span>
+            <span class="line line-4"><span class="c-yellow">window</span>.<span class="c-pink">location</span> = <span class="c-gray">"https://niexian.site";</span></span>
+        </div>
     </div>
 
     <div class="footer-minimal">
         <div class="footer-item">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M24 0v24h-24v-24h24zm-15.422 18.067c.375.642.842 1.15 1.517 1.458.65.317 1.458.467 2.458.467.95 0 1.708-.175 2.275-.517.567-.342.942-.8 1.125-1.375.183-.567.275-1.283.275-2.142v-6.658h-2.108v6.525c0 .658-.117 1.125-.342 1.4-.217.275-.592.408-1.125.408-.533 0-.892-.125-1.108-.383-.217-.258-.333-.658-.333-1.2h-2.633zm-4.75-2.008c.358.558.85 1.008 1.5 1.342.642.333 1.458.492 2.442.492 1.158 0 2.05-.283 2.683-.842.642-.558.958-1.333.958-2.325 0-.742-.183-1.325-.542-1.742-.358-.417-.917-.758-1.683-1.025l-.942-.333c-.5-.167-.85-.35-.1.542-.158.192-.242.425-.242.708 0 .433.158.758.467.983.317.217.75.333 1.308.333.517 0 .933-.125 1.25-.383.317-.25.5-.592.542-1.033h2.325c-.058 1.033-.425 1.858-1.108 2.467-.675.608-1.633.917-2.883.917-1.1 0-1.95-.275-2.558-.825-.608-.558-.917-1.317-.917-2.275 0-.742.192-1.333.567-1.767.383-.442.958-.8 1.717-1.067l.95-.333c.525-.183.9-.4 1.108-.658.217-.258.325-.567.325-.925 0-.375-.133-.683-.4-.917-.267-.233-.642-.35-1.117-.35-.5 0-.883.125-1.142.375-.258.25-.408.617-.45 1.1h-2.317c.058-.983.408-1.758 1.058-2.325.658-.567 1.55-.85 2.683-.85 1.1 0 1.958.283 2.583.842.625.558.942 1.3.942 2.233 0 .667-.175 1.2-.525 1.6-.342.4-.875.725-1.592.975l-.942.333c-.558.2-.958.442-1.192.725-.225.275-.342.625-.342 1.05 0 .442.158.792.475 1.042.317.25.758.375 1.317.375.558 0 .992-.15 1.292-.45.3-.3.467-.717.492-1.25h2.317c-.05 1.033-.417 1.867-1.108 2.5-.683.625-1.642.942-2.875.942-1.1 0-1.967-.283-2.583-.85-.625-.558-.933-1.317-.933-2.275 0-.742.192-1.333.567-1.767.383-.442.958-.8 1.717-1.067l.95-.333c.525-.183.9-.4 1.108-.658.217-.258.325-.567.325-.925 0-.375-.133-.683-.4-.917-.267-.233-.642-.35-1.117-.35-.5 0-.883.125-1.142.375-.258.25-.408.617-.45 1.1h-2.317c.058-.983.408-1.758 1.058-2.325.658-.567 1.55-.85 2.683-.85 1.1 0 1.958.283 2.583.842.625.558.942 1.3.942 2.233 0 .667-.175 1.2-.525 1.6-.342.4-.875.725-1.592.975l-.942.333c-.558.2-.958.442-1.192.725-.225.275-.342.625-.342 1.05z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-4h2v4zm0-6h-2V7h2v2z"/></svg>
             <span class="footer-label">Javascript & NodeJS</span>
         </div>
         <div class="footer-item">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z"/></svg>
             <span class="footer-label">Full FrontEnd</span>
         </div>
         <div class="footer-item">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14.6 16.6l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4zM9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4z"/></svg>
             <span class="footer-label">HTML & CSS</span>
         </div>
         <div class="footer-item">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             <span class="footer-label">Peak Glorious RoV & Peak Immortal 2 Valorant</span>
         </div>
     </div>
