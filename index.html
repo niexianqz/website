@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niexian | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Dancing+Script:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- TOP SECTION: Rainbow Logo --- */
+        .rainbow-container {
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .r-n { color: #ff3b30; }
+        .r-i { color: #ff9500; }
+        .r-e { color: #ffcc00; }
+        .r-x { color: #4cd964; }
+        .r-i2 { color: #007aff; }
+        .r-a { color: #5856d6; }
+        .r-n2 { color: #af52de; }
+
+        .cursor {
+            color: #ffffff;
+            margin-left: 10px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- MIDDLE SECTION --- */
+        .star {
+            color: #00ffcc;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .welcome-text {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .nx-bold { font-weight: 800; color: #fff; }
+
+        .dev-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+            padding: 10px 40px;
+        }
+
+        .brush-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 90%;
+            background: radial-gradient(circle, rgba(26, 74, 158, 0.6) 0%, transparent 80%);
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        .dev-tag { color: #ff4d4d; font-size: 2rem; font-weight: bold; }
+        .dev-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+
+        /* --- ANIMATED CODE SECTION --- */
+        .code-area {
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+            line-height: 2;
+            text-align: left;
+            margin-bottom: 80px;
+            background: #161616;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .line {
+            display: block;
+            width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid transparent;
+        }
+
+        /* Typing Animations */
+        .line-1 { animation: typing 1.5s steps(30) 0.5s forwards, hideCursor 0.1s 2s forwards; }
+        .line-2 { animation: typing 1.5s steps(30) 2s forwards, hideCursor 0.1s 3.5s forwards; }
+        .line-3 { animation: typing 2s steps(40) 3.5s forwards, hideCursor 0.1s 5.5s forwards; }
+        .line-4 { animation: typing 1.5s steps(30) 5.5s forwards, showCursor 0.1s 5.5s forwards; }
+
+        @keyframes typing { from { width: 0; border-right-color: #fff; } to { width: 100%; border-right-color: #fff; } }
+        @keyframes hideCursor { to { border-right-color: transparent; } }
+        @keyframes showCursor { to { border-right-color: #fff; } }
+
+        .c-yellow { color: #ffcc00; }
+        .c-pink { color: #ff00ff; }
+        .c-cyan { color: #00cccc; }
+        .c-green { color: #a6e22e; }
+        .c-gray { color: #75715e; }
+
+        /* --- FOOTER SECTION: Clean & Organized --- */
+        .footer-tech {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            border-top: 1px solid #222;
+            padding-top: 40px;
+            margin-top: auto;
+        }
+
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .tech-item:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+
+        .tech-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .tech-value { font-size: 0.95rem; color: #ccc; }
+
+        @media (max-width: 600px) {
+            .footer-tech { grid-template-columns: 1fr; }
+            .dev-name { font-size: 2.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="rainbow-container">
+        <span class="r-n">n</span><span class="r-i">i</span><span class="r-e">e</span><span class="r-x">x</span><span class="r-i2">i</span><span class="r-a">a</span><span class="r-n2">n</span>
+        <span class="cursor">|</span>
+    </div>
+
+    <div class="star">✦</div>
+
+    <div class="welcome-text">
+        Welcome to the <span class="nx-bold">NX.</span> website.
+    </div>
+
+    <div class="dev-wrapper">
+        <div class="brush-bg"></div>
+        <span class="dev-tag">Dev.</span>
+        <span class="dev-name">Niexian</span>
+    </div>
+
+    <div class="code-area">
+        <span class="line line-1"><span class="c-yellow">this_page</span>.<span class="c-pink">home</span> = <span class="c-yellow">true</span>;</span>
+        <span class="line line-2"><span class="c-yellow">if</span> (<span class="c-cyan">page_niexian</span>) <span class="c-yellow">niexian_home</span>();</span>
+        <span class="line line-3"><span class="c-yellow">else</span> <span class="c-pink">console</span>.<span class="c-pink">log</span>(<span class="c-green">"Welcome to the NX. website."</span>);</span>
+        <span class="line line-4"><span class="c-yellow">window</span>.<span class="c-pink">location</span> = <span class="c-gray">https://niexian.site;</span></span>
+    </div>
+
+    <div class="footer-tech">
+        <div class="tech-item">
+            <span class="tech-label">Core Stack</span>
+            <span class="tech-value">Javascript & NodeJS</span>
+        </div>
+        <div class="tech-item">
+            <span class="tech-label">Development</span>
+            <span class="tech-value">Full FrontEnd</span>
+        </div>
+        <div class="tech-item">
+            <span class="tech-label">Languages</span>
+            <span class="tech-value">HTML & CSS</span>
+        </div>
+        <div class="tech-item">
+            <span class="tech-label">Achievements</span>
+            <span class="tech-value">Peak Glorious RoV & Peak Immortal 2 Valorant</span>
+        </div>
+    </div>
+
+</body>
+</html>
