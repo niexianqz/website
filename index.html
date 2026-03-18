@@ -32,7 +32,6 @@
             align-items: center;
         }
 
-        /* Specific rainbow colors from source */
         .r-n { color: #ff3b30; }
         .r-i { color: #ff9500; }
         .r-e { color: #ffcc00; }
@@ -65,7 +64,7 @@
             transform: translate(-50%, -50%);
             width: 140%;
             height: 60px;
-            background: rgba(30, 80, 180, 0.35); /* Simulated blue brush */
+            background: rgba(30, 80, 180, 0.35);
             filter: blur(25px);
             z-index: -1;
             border-radius: 50px;
@@ -148,14 +147,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            text-decoration: none; /* For the link */
+            text-decoration: none;
             color: inherit;
             transition: color 0.3s ease;
         }
 
         .footer-item:hover { color: #ffffff; }
 
-        .svg-icon { width: 14px; height: 14px; fill: currentColor; }
+        .svg-icon { width: 15px; height: 15px; fill: currentColor; }
         .footer-label { font-weight: 500; }
 
     </style>
@@ -189,7 +188,9 @@
 
     <div class="footer-minimal">
         <div class="footer-item">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-4h2v4zm0-6h-2V7h2v2z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24">
+                <path d="M3 3h18v18H3V3zm10.73 14.5c-.32.8-1.15 1.5-2.23 1.5-1.42 0-2.3-.92-2.3-2.62V11h1.88v5.3c0 .88.42 1.17 1.02 1.17.65 0 1.07-.38 1.28-.9l.35 1.63zM19 16c0 1.83-1.32 3-3.23 3-1.77 0-3.03-1-3.4-2.48l1.65-.67c.23.83.85 1.5 1.73 1.5 1.03 0 1.52-.52 1.52-1.2 0-.82-.57-1.1-1.72-1.55-1.7-.68-2.58-1.43-2.58-2.82 0-1.7 1.3-2.82 3.03-2.82 1.57 0 2.72.82 3.12 2.15l-1.65.65c-.2-.7-.78-1.17-1.45-1.17-.83 0-1.28.45-1.28 1.05 0 .68.53.98 1.65 1.42 1.78.7 2.6 1.48 2.6 2.94z"/>
+            </svg>
             <span class="footer-label">Javascript & NodeJS</span>
         </div>
         <div class="footer-item">
