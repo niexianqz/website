@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Effect: niexian</title>
+  <style>
+    /* จัดหน้ากระดาษให้อยู่ตรงกลาง (เอาออกได้ถ้าไม่ต้องการ) */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #282c34; /* พื้นหลังสีเข้มแบบหน้าจอเขียนโค้ด */
+      color: #61dafb; /* สีตัวอักษร */
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace; /* ฟอนต์สไตล์โค้ดดิ้ง */
+    }
+
+    /* สไตล์ของข้อความและเคอร์เซอร์กะพริบ */
+    #typing-text {
+      font-size: 3rem;
+      border-right: 3px solid #61dafb; /* เส้นเคอร์เซอร์ */
+      padding-right: 5px;
+      animation: blink 0.8s step-end infinite; /* สั่งให้เคอร์เซอร์กะพริบ */
+    }
+
+    /* อนิเมชันเคอร์เซอร์กะพริบ */
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: #61dafb; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="typing-text"></div>
+
+  <script>
+    // ตั้งค่าข้อความและความเร็ว
+    const textToType = "niexian";
+    const typingSpeed = 200; // ความเร็วในการพิมพ์ (มิลลิวินาที) ยิ่งน้อยยิ่งเร็ว
+    
+    let i = 0;
+    const textElement = document.getElementById("typing-text");
+
+    function typeWriter() {
+      // เช็คว่าพิมพ์ครบทุกตัวอักษรหรือยัง
+      if (i < textToType.length) {
+        textElement.innerHTML += textToType.charAt(i); // เติมตัวอักษรทีละตัว
+        i++;
+        setTimeout(typeWriter, typingSpeed); // หน่วงเวลาแล้วเรียกตัวเองซ้ำ
+      }
+    }
+
+    // เริ่มทำงานเมื่อเปิดหน้าเว็บ
+    window.onload = () => {
+      // ใส่ delay นิดนึงก่อนเริ่มพิมพ์ (500 ms) จะได้ดูเป็นธรรมชาติ
+      setTimeout(typeWriter, 500); 
+    };
+  </script>
+
+</body>
+</html>
