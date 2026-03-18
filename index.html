@@ -1,38 +1,37 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Typing Effect: niexian สีรุ้ง</title>
+  <title>Typing Effect: niexian (Rainbow)</title>
   <style>
-    /* จัดหน้ากระดาษให้อยู่ตรงกลาง (สไตล์เดิม) */
+    /* Center the content on the screen */
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #282c34; /* พื้นหลังสีเข้มแบบเดิม */
+      background-color: #1a1a1a; /* Dark sleek background */
       margin: 0;
       font-family: 'Courier New', Courier, monospace;
     }
 
-    /* สไตล์ของข้อความสีรุ้ง */
+    /* Container for the rainbow text */
     #typing-text {
-      font-size: 4rem; /* ขยายขนาดใหญ่ขึ้นอีกนิดให้เห็นชัดๆ */
-      font-weight: bold; /* ทำตัวหนา */
+      font-size: 4rem;
+      font-weight: bold;
       position: relative;
     }
 
-    /* เคอร์เซอร์กะพริบแยกต่างหาก (สไตล์ใหม่เพื่อให้เคอร์เซอร์ไม่เป็นสีรุ้งตามตัวอักษร) */
+    /* Blinking cursor effect */
     #typing-text::after {
       content: '|';
-      color: #61dafb; /* สีเคอร์เซอร์เดิม */
+      color: #ffffff; /* White cursor */
       position: absolute;
-      margin-left: 5px;
+      margin-left: 8px;
       animation: blink 0.8s step-end infinite;
     }
 
-    /* อนิเมชันเคอร์เซอร์กะพริบ */
     @keyframes blink {
       from, to { opacity: 0; }
       50% { opacity: 1; }
@@ -44,48 +43,38 @@
   <div id="typing-text"></div>
 
   <script>
-    // ตั้งค่าข้อความและความเร็ว
     const textToType = "niexian";
-    const typingSpeed = 200; // ความเร็วเดิม
+    const typingSpeed = 150; // Speed in milliseconds
     
-    // กำหนดชุดสีรุ้ง (ตัวละสี)
-    // สำหรับ "niexian" มี 7 ตัวอักษรพอดีครับ
+    // Rainbow color palette
     const rainbowColors = [
-      '#e74c3c', // n - สีแดง
-      '#e67e22', // i - สีส้ม
-      '#f1c40f', // e - สีเหลือง
-      '#2ecc71', // x - สีเขียว
-      '#3498db', // i - สีฟ้า
-      '#8e44ad', // a - สีม่วง
-      '#ff8c00'  // n - สีส้มเข้ม (หรือเลือกสีอื่นที่คุณชอบ)
+      '#FF0000', // Red
+      '#FF7F00', // Orange
+      '#FFFF00', // Yellow
+      '#00FF00', // Green
+      '#0000FF', // Blue
+      '#4B0082', // Indigo
+      '#9400D3'  // Violet
     ];
     
     let i = 0;
     const textElement = document.getElementById("typing-text");
 
     function typeWriterRainbow() {
-      // เช็คว่าพิมพ์ครบทุกตัวอักษรหรือยัง
       if (i < textToType.length) {
-        
-        // 1. รับตัวอักษรปัจจุบัน
         const char = textToType.charAt(i);
-        
-        // 2. ดึงสีรุ้งตามลำดับตัวอักษร
-        // หากตัวอักษรเยอะกว่าสีที่กำหนด มันจะวนลูปสีกลับมาใช้ใหม่
         const color = rainbowColors[i % rainbowColors.length];
         
-        // 3. สร้าง HTML span สำหรับตัวอักษรนี้พร้อมกำหนดสี
-        // แทนที่จะพิมพ์ textElement.innerHTML += char;
+        // Wrap each character in a span with a specific color
         textElement.innerHTML += `<span style="color:${color}">${char}</span>`;
         
         i++;
-        setTimeout(typeWriterRainbow, typingSpeed); // หน่วงเวลาแล้วเรียกตัวเองซ้ำ
+        setTimeout(typeWriterRainbow, typingSpeed);
       }
     }
 
-    // เริ่มทำงานเมื่อเปิดหน้าเว็บ
+    // Start the effect after a short delay
     window.onload = () => {
-      // ใส่ delay นิดนึงก่อนเริ่มพิมพ์ (500 ms)
       setTimeout(typeWriterRainbow, 500); 
     };
   </script>
