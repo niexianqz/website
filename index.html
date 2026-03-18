@@ -3,32 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Typing Effect: niexian</title>
+  <title>Typing Effect: niexian สีรุ้ง</title>
   <style>
-    /* จัดหน้ากระดาษให้อยู่ตรงกลาง (เอาออกได้ถ้าไม่ต้องการ) */
+    /* จัดหน้ากระดาษให้อยู่ตรงกลาง (สไตล์เดิม) */
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #282c34; /* พื้นหลังสีเข้มแบบหน้าจอเขียนโค้ด */
-      color: #61dafb; /* สีตัวอักษร */
+      background-color: #282c34; /* พื้นหลังสีเข้มแบบเดิม */
       margin: 0;
-      font-family: 'Courier New', Courier, monospace; /* ฟอนต์สไตล์โค้ดดิ้ง */
+      font-family: 'Courier New', Courier, monospace;
     }
 
-    /* สไตล์ของข้อความและเคอร์เซอร์กะพริบ */
+    /* สไตล์ของข้อความสีรุ้ง */
     #typing-text {
-      font-size: 3rem;
-      border-right: 3px solid #61dafb; /* เส้นเคอร์เซอร์ */
-      padding-right: 5px;
-      animation: blink 0.8s step-end infinite; /* สั่งให้เคอร์เซอร์กะพริบ */
+      font-size: 4rem; /* ขยายขนาดใหญ่ขึ้นอีกนิดให้เห็นชัดๆ */
+      font-weight: bold; /* ทำตัวหนา */
+      position: relative;
+    }
+
+    /* เคอร์เซอร์กะพริบแยกต่างหาก (สไตล์ใหม่เพื่อให้เคอร์เซอร์ไม่เป็นสีรุ้งตามตัวอักษร) */
+    #typing-text::after {
+      content: '|';
+      color: #61dafb; /* สีเคอร์เซอร์เดิม */
+      position: absolute;
+      margin-left: 5px;
+      animation: blink 0.8s step-end infinite;
     }
 
     /* อนิเมชันเคอร์เซอร์กะพริบ */
     @keyframes blink {
-      from, to { border-color: transparent; }
-      50% { border-color: #61dafb; }
+      from, to { opacity: 0; }
+      50% { opacity: 1; }
     }
   </style>
 </head>
@@ -39,24 +46,47 @@
   <script>
     // ตั้งค่าข้อความและความเร็ว
     const textToType = "niexian";
-    const typingSpeed = 200; // ความเร็วในการพิมพ์ (มิลลิวินาที) ยิ่งน้อยยิ่งเร็ว
+    const typingSpeed = 200; // ความเร็วเดิม
+    
+    // กำหนดชุดสีรุ้ง (ตัวละสี)
+    // สำหรับ "niexian" มี 7 ตัวอักษรพอดีครับ
+    const rainbowColors = [
+      '#e74c3c', // n - สีแดง
+      '#e67e22', // i - สีส้ม
+      '#f1c40f', // e - สีเหลือง
+      '#2ecc71', // x - สีเขียว
+      '#3498db', // i - สีฟ้า
+      '#8e44ad', // a - สีม่วง
+      '#ff8c00'  // n - สีส้มเข้ม (หรือเลือกสีอื่นที่คุณชอบ)
+    ];
     
     let i = 0;
     const textElement = document.getElementById("typing-text");
 
-    function typeWriter() {
+    function typeWriterRainbow() {
       // เช็คว่าพิมพ์ครบทุกตัวอักษรหรือยัง
       if (i < textToType.length) {
-        textElement.innerHTML += textToType.charAt(i); // เติมตัวอักษรทีละตัว
+        
+        // 1. รับตัวอักษรปัจจุบัน
+        const char = textToType.charAt(i);
+        
+        // 2. ดึงสีรุ้งตามลำดับตัวอักษร
+        // หากตัวอักษรเยอะกว่าสีที่กำหนด มันจะวนลูปสีกลับมาใช้ใหม่
+        const color = rainbowColors[i % rainbowColors.length];
+        
+        // 3. สร้าง HTML span สำหรับตัวอักษรนี้พร้อมกำหนดสี
+        // แทนที่จะพิมพ์ textElement.innerHTML += char;
+        textElement.innerHTML += `<span style="color:${color}">${char}</span>`;
+        
         i++;
-        setTimeout(typeWriter, typingSpeed); // หน่วงเวลาแล้วเรียกตัวเองซ้ำ
+        setTimeout(typeWriterRainbow, typingSpeed); // หน่วงเวลาแล้วเรียกตัวเองซ้ำ
       }
     }
 
     // เริ่มทำงานเมื่อเปิดหน้าเว็บ
     window.onload = () => {
-      // ใส่ delay นิดนึงก่อนเริ่มพิมพ์ (500 ms) จะได้ดูเป็นธรรมชาติ
-      setTimeout(typeWriter, 500); 
+      // ใส่ delay นิดนึงก่อนเริ่มพิมพ์ (500 ms)
+      setTimeout(typeWriterRainbow, 500); 
     };
   </script>
 
